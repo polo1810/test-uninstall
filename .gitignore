@@ -1,0 +1,14 @@
+# Claude Code
+.claude/
+
+# PyInstaller
+build/
+*.pyc
+__pycache__/
+
+# Inno Setup output
+Output/
+
+# OS
+Thumbs.db
+.DS_Store
