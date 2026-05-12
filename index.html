@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard - Test Désinstallation</title>
+  <style>
+    body { font-family: -apple-system, Arial, sans-serif; max-width: 700px; margin: 50px auto; padding: 20px; }
+    h1 { color: #333; }
+    .card { background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0; }
+    .step { margin: 15px 0; padding-left: 20px; border-left: 3px solid #0066cc; }
+    code { background: #e8e8e8; padding: 2px 6px; border-radius: 3px; font-size: 13px; }
+    .url { color: #0066cc; word-break: break-all; }
+  </style>
+</head>
+<body>
+  <h1>🧪 Test de détection de désinstallation</h1>
+  
+  <div class="card">
+    <h2>Comment ça marche</h2>
+    <div class="step">
+      <strong>1.</strong> L'utilisateur installe l'app via l'installeur Inno Setup
+    </div>
+    <div class="step">
+      <strong>2.</strong> L'app crée un <code>userId</code> unique dans <code>%APPDATA%\TestUninstall\user.txt</code>
+    </div>
+    <div class="step">
+      <strong>3.</strong> Quand l'utilisateur désinstalle, le hook <code>[UninstallRun]</code> lit l'userId et fait un POST vers <code>/uninstalled?userId=XXX</code>
+    </div>
+    <div class="step">
+      <strong>4.</strong> Tu vois les pings dans les <strong>logs Netlify</strong> (onglet Functions → uninstalled → Logs)
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Endpoint actif</h2>
+    <p>L'endpoint qui reçoit les pings est :</p>
+    <p class="url">https://VOTRE-SITE.netlify.app/.netlify/functions/uninstalled?userId=XXX</p>
+    <p>Tu peux le tester directement en cliquant : <a href="/.netlify/functions/uninstalled?userId=test-manuel">Simuler un ping</a></p>
+  </div>
+
+  <div class="card">
+    <h2>Voir les pings reçus</h2>
+    <p>Va dans ton dashboard Netlify → <strong>Functions</strong> → <strong>uninstalled</strong> → <strong>Logs</strong>. Tu verras chaque désinstallation en temps réel.</p>
+  </div>
+</body>
+</html>
